@@ -113,6 +113,10 @@ export * from "./features/decoration/model";
 export * from "./features/decoration/views";
 export * from "./features/decoration/decoration-placer";
 
+export * from "./features/edge-intersection/di.config";
+export * from "./features/edge-intersection/intersection-finder";
+export * from "./features/edge-intersection/sweepline";
+
 export * from "./features/move/model";
 export * from "./features/move/move";
 export * from "./features/move/snap";

@@ -31,11 +31,11 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class SvgViewportView implements IView {
-    render(model: Readonly<ViewportRootElement>, context: RenderingContext): VNode {
+    render(model: Readonly<ViewportRootElement>, context: RenderingContext, args?: object): VNode {
         const transform = `scale(${model.zoom}) translate(${-model.scroll.x},${-model.scroll.y})`;
         return <svg>
             <g transform={transform}>
-                {context.renderChildren(model)}
+                {context.renderChildren(model, args)}
             </g>
         </svg>;
     }
@@ -43,7 +43,7 @@ export class SvgViewportView implements IView {
 
 @injectable()
 export class CircularNodeView extends ShapeView {
-    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext): VNode | undefined {
+    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext, args?: object): VNode | undefined {
         if (!this.isVisible(node, context)) {
             return undefined;
         }
@@ -52,7 +52,7 @@ export class CircularNodeView extends ShapeView {
             <circle class-sprotty-node={node instanceof SNode} class-sprotty-port={node instanceof SPort}
                     class-mouseover={node.hoverFeedback} class-selected={node.selected}
                     r={radius} cx={radius} cy={radius}></circle>
-            {context.renderChildren(node)}
+            {context.renderChildren(node, args)}
         </g>;
     }
 
@@ -64,7 +64,7 @@ export class CircularNodeView extends ShapeView {
 
 @injectable()
 export class RectangularNodeView extends ShapeView {
-    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext): VNode | undefined {
+    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext, args?: object): VNode | undefined {
         if (!this.isVisible(node, context)) {
             return undefined;
         }
@@ -72,14 +72,14 @@ export class RectangularNodeView extends ShapeView {
             <rect class-sprotty-node={node instanceof SNode} class-sprotty-port={node instanceof SPort}
                   class-mouseover={node.hoverFeedback} class-selected={node.selected}
                   x="0" y="0" width={Math.max(node.size.width, 0)} height={Math.max(node.size.height, 0)}></rect>
-            {context.renderChildren(node)}
+            {context.renderChildren(node, args)}
         </g>;
     }
 }
 
 @injectable()
 export class DiamondNodeView extends ShapeView {
-    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext): VNode | undefined {
+    render(node: Readonly<SShapeElement & Hoverable & Selectable>, context: RenderingContext, args?: object): VNode | undefined {
         if (!this.isVisible(node, context)) {
             return undefined;
         }
@@ -89,7 +89,7 @@ export class DiamondNodeView extends ShapeView {
             <polygon class-sprotty-node={node instanceof SNode} class-sprotty-port={node instanceof SPort}
                   class-mouseover={node.hoverFeedback} class-selected={node.selected}
                   points={points} />
-            {context.renderChildren(node)}
+            {context.renderChildren(node, args)}
         </g>;
     }
 }

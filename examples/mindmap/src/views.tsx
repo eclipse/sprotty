@@ -24,13 +24,13 @@ import { injectable } from "inversify";
 
 @injectable()
 export class MindmapNodeView extends RectangularNodeView {
-    render(node: SNode, context: RenderingContext): VNode {
+    render(node: SNode, context: RenderingContext, args?: object): VNode {
         return <g class-node={true}>
             <rect class-sprotty-node={true} class-selected={node.selected} class-mouseover={node.hoverFeedback}
                   x={0} y={0} rx={10} ry={10}
                   width={Math.max(0, node.bounds.width)} height={Math.max(0, node.bounds.height)}>
             </rect>
-            {context.renderChildren(node)}
+            {context.renderChildren(node, args)}
         </g>;
     }
 }

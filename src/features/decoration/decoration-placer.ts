@@ -41,8 +41,7 @@ export class DecorationPlacer implements IVNodePostprocessor {
 
     protected getPosition(element: SModelElement & Decoration): Point {
         if (element instanceof SChildElement && element.parent instanceof SRoutableElement) {
-            const router = this.edgeRouterRegistry.get(element.parent.routerKind);
-            const route = router.route(element.parent);
+            const route =  this.edgeRouterRegistry.route(element.parent);
             if (route.length > 1) {
                 const index = Math.floor(0.5  * (route.length - 1));
                 const offset = isSizeable(element)

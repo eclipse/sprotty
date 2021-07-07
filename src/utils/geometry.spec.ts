@@ -16,7 +16,7 @@
 
 import "mocha";
 import { expect } from "chai";
-import { almostEquals, euclideanDistance, manhattanDistance, Bounds, combine, includes, ORIGIN_POINT, angleBetweenPoints } from "./geometry";
+import { almostEquals, euclideanDistance, manhattanDistance, Bounds, combine, includes, ORIGIN_POINT, angleBetweenPoints, PointToPointLine } from "./geometry";
 
 describe('geometry', () => {
     describe('euclideanDistance', () => {
@@ -62,6 +62,37 @@ describe('geometry', () => {
         it('computes a 180° angle correctly', () => {
             expect(angleBetweenPoints({ x: 2, y: 0 }, { x: -3, y: 0 })).to.equal(Math.PI);
             expect(angleBetweenPoints({ x: 0, y: 2 }, { x: 0, y: -3 })).to.equal(Math.PI);
+        });
+    });
+
+    describe('PointToPointLine', () => {
+        describe('angle', () => {
+            it('computes a 45° angle correctly', () => {
+                expect(almostEquals(new PointToPointLine({ x: 0, y: 0 }, { x: 1, y: 1 }).angle, Math.PI / 4)).to.be.true;
+            });
+            it('computes a 90° angle correctly', () => {
+                expect(almostEquals(new PointToPointLine({ x: 0, y: 0 }, { x: 0, y: 1 }).angle, Math.PI / 2)).to.be.true;
+                expect(almostEquals(new PointToPointLine({ x: 0, y: 0 }, { x: 0, y: -1 }).angle, -Math.PI / 2)).to.be.true;
+            });
+            it('computes a 180° angle correctly', () => {
+                expect(almostEquals(new PointToPointLine({ x: 0, y: 0 }, { x: 1, y: 0 }).angle, 0)).to.be.true;
+                expect(almostEquals(new PointToPointLine({ x: 0, y: 0 }, { x: -1, y: 0 }).angle, -Math.PI)).to.be.true;
+            });
+        });
+        describe('intersection', () => {
+            it('finds intersection of crossing lines', () => {
+                const lineA = new PointToPointLine({ x: 0, y: 0 }, { x: 1, y: 1 });
+                const lineB = new PointToPointLine({ x: 1, y: 0 }, { x: 0, y: 1 });
+                const intersection = lineA.intersection(lineB);
+                expect(intersection!.x).to.equal(0.5);
+                expect(intersection!.y).to.equal(0.5);
+            });
+            it('returns `undefined` for parallel lines', () => {
+                const lineA = new PointToPointLine({ x: 0, y: 0 }, { x: 1, y: 0 });
+                const lineB = new PointToPointLine({ x: 0, y: 1 }, { x: 1, y: 1 });
+                const intersection = lineA.intersection(lineB);
+                expect(intersection).to.be.undefined;
+            });
         });
     });
 });

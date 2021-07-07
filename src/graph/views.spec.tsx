@@ -80,7 +80,7 @@ describe('graph views', () => {
             children: []
         };
         const graph = graphFactory.createRoot(schema) as SGraph;
-        const view = new SGraphView();
+        const view = viewRegistry.get(graph.type);
         const vnode = view.render(graph, context);
         expect(toHTML(vnode)).to.be.equal('<svg class="sprotty-graph"><g transform="scale(1) translate(0,0)"></g></svg>');
     });

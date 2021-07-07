@@ -57,6 +57,16 @@ export function subtract(p1: Point, p2: Point): Point {
 }
 
 /**
+ * Specifies whether a point has exactly the same coordinates as another point.
+ * @param {Point} point1 a point
+ * @param {Point} point2 another point
+ * @returns {boolean} `true` if `point1` has exactly the same `x` and `y` values as `point2`, `false` otherwise.
+ */
+export function pointEquals(point1: Point, point2: Point): boolean {
+    return point1.x === point2.x && point1.y === point2.y;
+}
+
+/**
  * The Dimension of an object is composed of its width and height.
  */
 export interface Dimension {
@@ -182,7 +192,7 @@ export interface Insets {
  */
 export enum Direction { left, right, up, down }
 
-export type Orientation = 'north' | 'south' | 'east' | 'west';
+export type Orientation = 'north' | 'south' | 'east' | 'west';
 
 /**
  * Returns the "straight line" distance between two points.
@@ -249,7 +259,7 @@ export function angleBetweenPoints(a: Point, b: Point): number {
 export function shiftTowards(point: Point, refPoint: Point, distance: number): Point {
     const diff = subtract(refPoint, point);
     const normalized = normalize(diff);
-    const shift = {x: normalized.x * distance, y: normalized.y * distance};
+    const shift = { x: normalized.x * distance, y: normalized.y * distance };
     return add(point, shift);
 }
 
@@ -411,7 +421,7 @@ export interface Line {
  */
 export class PointToPointLine implements Line {
 
-    constructor(protected p1: Point, protected p2: Point) { }
+    constructor(public p1: Point, public p2: Point) { }
 
     get a(): number {
         return this.p1.y - this.p2.y;
@@ -423,6 +433,83 @@ export class PointToPointLine implements Line {
 
     get c(): number {
         return this.p2.x * this.p1.y - this.p1.x * this.p2.y;
+    }
+
+    /**
+     * The counter-clockwise angle of this line relative to the x-axis.
+     */
+    get angle(): number {
+        return Math.atan2(-this.a, this.b);
+    }
+
+    /**
+     * The slope of the line.
+     * A vertical line returns `undefined`.
+     */
+    get slope(): number | undefined {
+        if (this.b === 0) return undefined;
+        return this.a / this.b;
+    }
+
+    /**
+     * The slope of the line or `Number.MAX_SAFE_INTEGER` if vertical.
+     */
+    get slopeOrMax(): number {
+        if (this.slope === undefined) {
+            return Number.MAX_SAFE_INTEGER;
+        }
+        return this.slope;
+    }
+
+    /**
+     * @param otherLine the other line
+     * @returns the intersection point between `this` line and the `otherLine` if exists, or `undefined`.
+     */
+    intersection(otherLine: PointToPointLine): Point | undefined {
+        if (this.hasIndistinctPoints(otherLine)) {
+            return undefined;
+        }
+
+        const x1 = this.p1.x;
+        const y1 = this.p1.y;
+        const x2 = this.p2.x;
+        const y2 = this.p2.y;
+        const x3 = otherLine.p1.x;
+        const y3 = otherLine.p1.y;
+        const x4 = otherLine.p2.x;
+        const y4 = otherLine.p2.y;
+
+        const denominator = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1));
+        if (denominator === 0) {
+            return undefined;
+        }
+        const numeratorA = ((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3));
+        const numeratorB = ((x2 - x1) * (y1 - y3)) - ((y2 - y1) * (x1 - x3));
+        if (numeratorA === 0 && numeratorB === 0) {
+            return undefined;
+        }
+
+        const determinantA = numeratorA / denominator;
+        const determinantB = numeratorB / denominator;
+        if (determinantA < 0 || determinantA > 1 || determinantB < 0 || determinantB > 1) {
+            return undefined;
+        }
+
+        const x = x1 + (determinantA * (x2 - x1));
+        const y = y1 + (determinantA * (y2 - y1));
+        return { x, y };
+    }
+
+    /**
+     * @param otherLine the other line
+     * @returns whether the start and end point of this line is does not have distinct start
+     * or end points with the `otherLine`
+     */
+    hasIndistinctPoints(otherLine: PointToPointLine): boolean {
+        return pointEquals(this.p1, otherLine.p1) ||
+            pointEquals(this.p1, otherLine.p2) ||
+            pointEquals(this.p2, otherLine.p1) ||
+            pointEquals(this.p2, otherLine.p2);
     }
 }
 

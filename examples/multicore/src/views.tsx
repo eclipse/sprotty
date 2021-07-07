@@ -24,7 +24,7 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class ProcessorView implements IView {
-    render(model: Processor, context: RenderingContext): VNode {
+    render(model: Processor, context: RenderingContext, args?: object): VNode {
         const transform = `scale(${model.zoom}) translate(${-model.scroll.x},${-model.scroll.y})`;
         return <svg>
                 <defs>
@@ -33,7 +33,7 @@ export class ProcessorView implements IView {
                     </clipPath>
                 </defs>
                 <g transform={transform}>
-                    {context.renderChildren(model)}
+                    {context.renderChildren(model, args)}
                 </g>
             </svg>;
     }
@@ -45,13 +45,13 @@ export const CORE_DISTANCE = 10;
 @injectable()
 export class SimpleCoreView extends ShapeView {
 
-    render(model: Core, context: RenderingContext): VNode | undefined {
+    render(model: Core, context: RenderingContext, args?: object): VNode | undefined {
         if (!this.isVisible(model, context)) {
             return undefined;
         }
         const fillColor = KernelColor.getSVG(model.kernelNr);
         const content = <g>
-                {context.renderChildren(model)}
+                {context.renderChildren(model, args)}
             </g>;
         return <g class-core={true}>
                 <rect width={model.size.width}
@@ -69,13 +69,13 @@ export class SimpleCoreView extends ShapeView {
 @injectable()
 export class CoreView extends ShapeView {
 
-    render(model: Core, context: RenderingContext): VNode | undefined {
+    render(model: Core, context: RenderingContext, args?: object): VNode | undefined {
         if (!this.isVisible(model, context)) {
             return undefined;
         }
         const fillColor = KernelColor.getSVG(model.kernelNr);
         const content = <g>
-                {context.renderChildren(model)}
+                {context.renderChildren(model, args)}
             </g>;
         setAttr(content, 'clip-path', 'url(#core-clip)');
         return <g class-core={true}>
@@ -93,7 +93,7 @@ export class CoreView extends ShapeView {
 
 @injectable()
 export class CrossbarView implements IView {
-    render(model: Crossbar, context: RenderingContext): VNode {
+    render(model: Crossbar, context: RenderingContext, args?: object): VNode {
         const rows = (model.parent as Processor).rows;
         const columns = (model.parent as Processor).rows;
         let x: number;

@@ -16,13 +16,14 @@
 
 import { Container, ContainerModule } from "inversify";
 import {
-    TYPES, configureViewerOptions, SGraphView, SLabelView, SCompartmentView, PolylineEdgeView,
+    TYPES, configureViewerOptions, SGraphView, SLabelView, SCompartmentView, JumpingPolylineEdgeView,
     ConsoleLogger, LogLevel, loadDefaultModules, HtmlRootView, PreRenderedView, ExpandButtonView,
     SRoutingHandleView, PreRenderedElement, HtmlRoot, SGraph, configureModelElement, SLabel,
     SCompartment, SEdge, SButton, SRoutingHandle, RevealNamedElementActionProvider,
     CenterGridSnapper, expandFeature, nameFeature, withEditLabelFeature, editLabelFeature,
     RectangularNode
 } from "../../../src";
+import edgeIntersectionModule from "../../../src/features/edge-intersection/di.config";
 import { IconView, NodeView} from "./views";
 import { PopupModelProvider } from "./popup";
 import { ClassDiagramModelSource } from './model-source';
@@ -62,7 +63,7 @@ export default (containerId: string) => {
         configureModelElement(context, 'comp:pkgcontent', SCompartment, SCompartmentView);
         configureModelElement(context, 'icon', Icon, IconView);
         configureModelElement(context, 'label:icon', SLabel, SLabelView);
-        configureModelElement(context, 'edge:straight', SEdge, PolylineEdgeView);
+        configureModelElement(context, 'edge:straight', SEdge, JumpingPolylineEdgeView);
         configureModelElement(context, 'html', HtmlRoot, HtmlRootView);
         configureModelElement(context, 'pre-rendered', PreRenderedElement, PreRenderedView);
         configureModelElement(context, 'button:expand', SButton, ExpandButtonView);
@@ -77,6 +78,7 @@ export default (containerId: string) => {
 
     const container = new Container();
     loadDefaultModules(container);
+    container.load(edgeIntersectionModule);
     container.load(classDiagramModule);
     return container;
 };

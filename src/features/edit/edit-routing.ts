@@ -103,8 +103,7 @@ export class SwitchEditModeCommand extends Command {
 
     protected shouldRemoveHandle(handle: SRoutingHandle, parent: SRoutableElement): boolean {
         if (handle.kind === 'junction') {
-            const router = this.edgeRouterRegistry.get(parent.routerKind);
-            const route = router.route(parent);
+            const route = this.edgeRouterRegistry.route(parent);
             return route.find(rp => rp.pointIndex === handle.pointIndex) === undefined;
         }
         return false;

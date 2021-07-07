@@ -53,7 +53,8 @@
     "inversify": "^5.0.1",
     "snabbdom": "0.7.3",
     "snabbdom-jsx": "0.4.2",
-    "snabbdom-virtualize": "0.7.0"
+    "snabbdom-virtualize": "0.7.0",
+    "tinyqueue": "^2.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.2.2",
