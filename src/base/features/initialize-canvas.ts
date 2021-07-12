@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../types";
 import { almostEquals, Bounds, isValidDimension } from '../../utils/geometry';
 import { Action } from '../actions/action';

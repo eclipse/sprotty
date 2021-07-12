@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../../base/types";
 import { IVNodePostprocessor } from "../../base/views/vnode-postprocessor";
 import { ViewerOptions } from "../../base/views/viewer-options";

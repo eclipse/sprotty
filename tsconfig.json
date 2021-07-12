@@ -4,7 +4,7 @@
     "outDir": "lib"
   },
   "include": [
-    "src", "typings"
+    "src"
   ],
   "exclude": [
     "**/*.spec.ts", "**/*.spec.tsx"

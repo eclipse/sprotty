@@ -20,7 +20,7 @@ import { RenderingContext } from '../../base/views/view';
 import { ViewportRootElement } from '../viewport/viewport-root';
 import { SShapeElement } from './model';
 import { ShapeView } from './views';
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 
 describe('ShapeView.isVisible', () => {
 

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { h } from "snabbdom";
-import { VNode, VNodeData } from "snabbdom/vnode";
+import { VNode, VNodeData } from "snabbdom";
 import { SModelElement } from "../model/smodel";
 import { RenderingContext, IView } from "./view";
 import { injectable } from "inversify";

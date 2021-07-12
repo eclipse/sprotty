@@ -15,13 +15,13 @@
  ********************************************************************************/
 
  /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../lib/jsx';
 
 import 'reflect-metadata';
 import 'mocha';
 import { expect } from "chai";
 import { Container } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../base/types";
 import { IVNodePostprocessor } from '../base/views/vnode-postprocessor';
 import { CircularNodeView, RectangularNodeView } from "../lib/svg-views";

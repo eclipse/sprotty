@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../../src/lib/jsx';
 
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { IView, RenderingContext, setAttr, ThunkView, Direction, RGBColor, toSVG, rgb, ShapeView } from '../../../src';
 import { Channel, Core, Crossbar, Processor } from './chipmodel';
 import { injectable } from 'inversify';

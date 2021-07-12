@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable, optional } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { Action } from "../../base/actions/action";
 import { Animation, CompoundAnimation } from "../../base/animations/animation";
 import { CommandExecutionContext, ICommand, MergeableCommand, CommandReturn } from "../../base/commands/command";

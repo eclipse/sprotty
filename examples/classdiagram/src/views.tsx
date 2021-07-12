@@ -15,10 +15,11 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../../src/lib/jsx';
+
 
 import { RenderingContext, IView, RectangularNodeView, SNode } from "../../../src";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { Icon } from './model';
 import { injectable } from 'inversify';
 

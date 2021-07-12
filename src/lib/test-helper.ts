@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (c) 2017-2018 TypeFox and others.
+ * Copyright (c) 2017-2021 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -14,24 +14,17 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
- /** @jsx html */
-import { html } from './jsx';
+import { JSDOM } from "jsdom";
 
-import { VNode } from "snabbdom";
-import { IView, RenderingContext } from "../base/views/view";
-import { setClass } from "../base/views/vnode-utils";
-import { HtmlRoot } from "./model";
-import { injectable } from 'inversify';
+interface Global {
+  document: Document;
+  window: Window;
+}
 
-@injectable()
-export class HtmlRootView implements IView {
-    render(model: HtmlRoot, context: RenderingContext): VNode {
-        const root = <div>
-            { context.renderChildren(model) }
-        </div>;
-        for (const c of model.classes) {
-            setClass(root, c, true);
-        }
-        return root;
-    }
+declare const global: Global;
+
+export default function setupGlobal() {
+  const { window } = new JSDOM();
+  global.document = window.document;
+  global.window = global.document.defaultView!;
 }

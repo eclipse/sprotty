@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { ILogger } from "../../utils/logging";
 import { almostEquals, Bounds, Point, EMPTY_BOUNDS } from '../../utils/geometry';
 import { Action } from "../../base/actions/action";

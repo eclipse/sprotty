@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable, optional } from 'inversify';
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { Action, RequestAction, ResponseAction, generateRequestId } from "../../base/actions/action";
 import { Command, CommandExecutionContext } from "../../base/commands/command";
 import { ModelRequestCommand } from '../../base/commands/request-command';

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable, multiInject, optional } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../types";
 import { IActionDispatcher } from "../actions/action-dispatcher";
 import { SModelElement, SModelRoot } from "../model/smodel";
@@ -62,9 +62,9 @@ export class KeyTool implements IVNodePostprocessor {
 
     decorate(vnode: VNode, element: SModelElement): VNode {
         if (element instanceof SModelRoot) {
-            on(vnode, 'focus', this.focus.bind(this), element);
-            on(vnode, 'keydown', this.keyDown.bind(this), element);
-            on(vnode, 'keyup', this.keyUp.bind(this), element);
+            on(vnode, 'focus', this.focus.bind(this, element));
+            on(vnode, 'keydown', this.keyDown.bind(this, element));
+            on(vnode, 'keyup', this.keyUp.bind(this, element));
         }
         return vnode;
     }

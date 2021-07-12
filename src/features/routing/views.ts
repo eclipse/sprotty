@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 import { Point } from '../../utils/geometry';
 import { IView, RenderingContext } from '../../base/views/view';
 import { SRoutableElement, getAbsoluteRouteBounds } from './model';

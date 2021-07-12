@@ -5,9 +5,7 @@
     "declaration": false,
     "declarationMap": false
   },
-  "include": [
-    "../examples", "../src", "../typings"
-  ],
+  "files": ["../examples/app.ts"],
   "exclude": [
     "**/*.spec.ts", "**/*.spec.tsx"
   ]

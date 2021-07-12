@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from "inversify";
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 import { CommandExecutionContext, HiddenCommand, CommandResult } from '../../base/commands/command';
 import { IVNodePostprocessor } from '../../base/views/vnode-postprocessor';
 import { isSelectable } from '../select/model';

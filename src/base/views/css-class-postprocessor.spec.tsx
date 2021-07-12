@@ -15,7 +15,7 @@
  ********************************************************************************/
 
  /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../lib/jsx';
 
 import "mocha";
 import { expect } from "chai";

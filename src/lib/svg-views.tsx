@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from './jsx';
 
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { IView, RenderingContext } from "../base/views/view";
 import { SNode, SPort } from "../graph/sgraph";
 import { ViewportRootElement } from "../features/viewport/viewport-root";

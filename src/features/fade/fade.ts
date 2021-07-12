@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { Animation } from "../../base/animations/animation";
 import { CommandExecutionContext } from "../../base/commands/command";
 import { SModelRoot, SModelElement, SChildElement } from "../../base/model/smodel";

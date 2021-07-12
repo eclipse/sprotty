@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable, multiInject, optional } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { Action, isAction } from "../actions/action";
 import { IActionDispatcher } from "../actions/action-dispatcher";
 import { SModelElement, SModelRoot } from "../model/smodel";
@@ -125,18 +125,18 @@ export class MouseTool implements IVNodePostprocessor {
 
     decorate(vnode: VNode, element: SModelElement) {
         if (element instanceof SModelRoot) {
-            on(vnode, 'mouseover', this.mouseOver.bind(this), element);
-            on(vnode, 'mouseout', this.mouseOut.bind(this), element);
-            on(vnode, 'mouseenter', this.mouseEnter.bind(this), element);
-            on(vnode, 'mouseleave', this.mouseLeave.bind(this), element);
-            on(vnode, 'mousedown', this.mouseDown.bind(this), element);
-            on(vnode, 'mouseup', this.mouseUp.bind(this), element);
-            on(vnode, 'mousemove', this.mouseMove.bind(this), element);
-            on(vnode, 'wheel', this.wheel.bind(this), element);
-            on(vnode, 'contextmenu', (target: SModelElement, event: Event) => {
+            on(vnode, 'mouseover', this.mouseOver.bind(this, element));
+            on(vnode, 'mouseout', this.mouseOut.bind(this, element));
+            on(vnode, 'mouseenter', this.mouseEnter.bind(this, element));
+            on(vnode, 'mouseleave', this.mouseLeave.bind(this, element));
+            on(vnode, 'mousedown', this.mouseDown.bind(this, element));
+            on(vnode, 'mouseup', this.mouseUp.bind(this, element));
+            on(vnode, 'mousemove', this.mouseMove.bind(this, element));
+            on(vnode, 'wheel', this.wheel.bind(this, element));
+            on(vnode, 'contextmenu', (event: Event) => {
                 event.preventDefault();
-            }, element);
-            on(vnode, 'dblclick', this.doubleClick.bind(this), element);
+            });
+            on(vnode, 'dblclick', this.doubleClick.bind(this, element));
         }
         vnode = this.mouseListeners.reduce(
             (n: VNode, listener: MouseListener) => listener.decorate(n, element),

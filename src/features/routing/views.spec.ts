@@ -21,7 +21,7 @@ import { SShapeElement } from '../bounds/model';
 import { ViewportRootElement } from '../viewport/viewport-root';
 import { SRoutableElement } from './model';
 import { RoutableView } from './views';
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 
 describe('RoutableView.isVisible', () => {
 

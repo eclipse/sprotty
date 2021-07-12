@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 import { isValidDimension } from '../../utils/geometry';
 import { IView, RenderingContext } from '../../base/views/view';
 import { getAbsoluteBounds, BoundsAware } from './model';

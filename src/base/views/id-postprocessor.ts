@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../types";
 import { ILogger } from "../../utils/logging";
 import { SModelElement } from "../model/smodel";

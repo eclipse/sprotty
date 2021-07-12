@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../lib/jsx';
 
 import { injectable, multiInject, optional, interfaces } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { TYPES } from "../types";
 import { InstanceRegistry } from "../../utils/registry";
 import { Point, ORIGIN_POINT } from "../../utils/geometry";

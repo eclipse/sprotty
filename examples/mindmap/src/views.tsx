@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../../src/lib/jsx';
 
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { IView, RectangularNodeView, RenderingContext, SNode } from "../../../src";
 import { PopupButton } from "./model";
 import { injectable } from "inversify";

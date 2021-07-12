@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from "inversify";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { SModelElement } from "../model/smodel";
 import { Action } from "../actions/action";
 import { setAttr } from "./vnode-utils";

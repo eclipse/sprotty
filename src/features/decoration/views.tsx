@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 /** @jsx svg */
-import { svg } from 'snabbdom-jsx';
+import { svg } from '../../lib/jsx';
 
-import { VNode } from 'snabbdom/vnode';
+import { VNode } from 'snabbdom';
 import { IView, RenderingContext } from '../../base/views/view';
 import { SIssueMarker, SIssueSeverity } from './model';
 import { setClass } from '../../base/views/vnode-utils';

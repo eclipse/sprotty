@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { IVNodePostprocessor } from "./vnode-postprocessor";
-import { VNode } from "snabbdom/vnode";
+import { VNode } from "snabbdom";
 import { SModelElement } from "../model/smodel";
 import { setClass } from "./vnode-utils";
 import { injectable } from "inversify";

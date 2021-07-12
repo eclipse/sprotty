@@ -16,8 +16,8 @@
 
  /** @jsx svg */
 import { inject, injectable } from 'inversify';
-import { svg } from 'snabbdom-jsx';
-import { VNode } from "snabbdom/vnode";
+import { svg } from '../lib/jsx';
+import { VNode } from "snabbdom";
 import { getSubType } from "../base/model/smodel-utils";
 import { IView, RenderingContext } from "../base/views/view";
 import { setAttr } from '../base/views/vnode-utils';

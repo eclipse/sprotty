@@ -14,8 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { VNode } from "snabbdom/vnode";
-import { SModelElement } from "../model/smodel";
+import { VNode } from "snabbdom";
 
 export function setAttr(vnode: VNode, name: string, value: any) {
     getAttrs(vnode)[name] = value;
@@ -60,12 +59,12 @@ export function mergeStyle(vnode: VNode, style: any) {
     getData(vnode).style = {...(getData(vnode).style || {}), ...style};
 }
 
-export function on(vnode: VNode, event: string, listener: (model: SModelElement, event: Event) => void, element: SModelElement) {
+export function on(vnode: VNode, event: string, listener: (event: Event) => void) {
     const val = getOn(vnode);
     if (val[event]) {
         throw new Error('EventListener for ' + event + ' already registered on VNode');
     }
-    (val as any)[event] = [listener, element];
+    (val as any)[event] = listener;
 }
 
 export function getAttrs(vnode: VNode) {

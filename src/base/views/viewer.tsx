@@ -15,16 +15,9 @@
  ********************************************************************************/
 
 /** @jsx html */
-import { html } from 'snabbdom-jsx'; // must be html here, as we're creating a div
+import { html } from '../../lib/jsx'; // must be html here, as we're creating a div
 
-import { init } from "snabbdom";
-import { VNode } from "snabbdom/vnode";
-import { Module } from "snabbdom/modules/module";
-import { propsModule } from "snabbdom/modules/props";
-import { attributesModule } from "snabbdom/modules/attributes";
-import { styleModule } from "snabbdom/modules/style";
-import { eventListenersModule } from "snabbdom/modules/eventlisteners";
-import { classModule } from "snabbdom/modules/class";
+import { init, VNode, Module, propsModule, attributesModule, styleModule, eventListenersModule, classModule } from "snabbdom";
 import { inject, injectable, multiInject, optional } from "inversify";
 import { TYPES } from "../types";
 import { ILogger } from "../../utils/logging";
