@@ -28,10 +28,7 @@ export interface MatchResult {
 }
 
 export function forEachMatch(matchResult: MatchResult, callback: (id: string, match: Match) => void): void {
-    for (const id in matchResult) {
-        if (matchResult.hasOwnProperty(id))
-            callback(id, matchResult[id]);
-    }
+    Object.keys(matchResult).forEach(id => callback(id, matchResult[id]));
 }
 
 export class ModelMatcher {

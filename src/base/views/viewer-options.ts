@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import { Container, interfaces } from "inversify";
+import { safeAssign } from "../../utils/object";
 import { TYPES } from "../types";
 
 export interface ViewerOptions {
@@ -66,9 +67,6 @@ export function configureViewerOptions(context: { bind: interfaces.Bind, isBound
  */
 export function overrideViewerOptions(container: Container, options: Partial<ViewerOptions>): ViewerOptions {
     const opt = container.get<ViewerOptions>(TYPES.ViewerOptions);
-    for (const p in options) {
-        if (options.hasOwnProperty(p))
-            (opt as any)[p] = (options as any)[p];
-    }
+    safeAssign(opt, options);
     return opt;
 }

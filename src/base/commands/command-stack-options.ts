@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import { Container } from "inversify";
+import { safeAssign } from "../../utils/object";
 import { TYPES } from '../types';
 
 /**
@@ -38,9 +39,6 @@ export interface CommandStackOptions {
 
 export function overrideCommandStackOptions(container: Container, options: Partial<CommandStackOptions>): CommandStackOptions {
     const defaultOptions = container.get<CommandStackOptions>(TYPES.CommandStackOptions);
-    for (const p in options) {
-        if (options.hasOwnProperty(p))
-            (defaultOptions as any)[p] = (options as any)[p];
-    }
+    safeAssign(defaultOptions, options);
     return defaultOptions;
 }

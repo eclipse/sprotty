@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import { JsonAny } from '../../utils/json';
+import { hasOwnProperty } from '../../utils/object';
 
 /**
  * An action describes a change to the model declaratively.
@@ -25,8 +26,8 @@ export interface Action {
     readonly kind: string
 }
 
-export function isAction(object?: any): object is Action {
-    return object !== undefined && object.hasOwnProperty('kind') && typeof(object['kind']) === 'string';
+export function isAction(object?: unknown): object is Action {
+    return hasOwnProperty(object, 'kind') && typeof(object.kind) === 'string';
 }
 
 /**
@@ -37,9 +38,9 @@ export interface RequestAction<Res extends ResponseAction> extends Action {
     readonly requestId: string
 }
 
-export function isRequestAction(object?: any): object is RequestAction<ResponseAction> {
-    return isAction(object) && object.hasOwnProperty('requestId')
-            && typeof((object as any)['requestId']) === 'string';
+export function isRequestAction(object?: unknown): object is RequestAction<ResponseAction> {
+    return isAction(object) && hasOwnProperty(object, 'requestId')
+            && typeof(object.requestId) === 'string';
 }
 
 let nextRequestId = 1;
@@ -59,10 +60,10 @@ export interface ResponseAction extends Action {
     readonly responseId: string
 }
 
-export function isResponseAction(object?: any): object is ResponseAction {
-    return isAction(object) && object.hasOwnProperty('responseId')
-            && typeof((object as any)['responseId']) === 'string'
-            && (object as any)['responseId'] !== '';
+export function isResponseAction(object?: unknown): object is ResponseAction {
+    return isAction(object) && hasOwnProperty(object, 'responseId')
+            && typeof(object.responseId) === 'string'
+            && object.responseId !== '';
 }
 
 /**
@@ -86,7 +87,7 @@ export class LabeledAction {
     constructor(readonly label: string, readonly actions: Action[], readonly icon?: string) { }
 }
 
-export function isLabeledAction(element: any): element is LabeledAction {
+export function isLabeledAction(element: unknown): element is LabeledAction {
     return element !== undefined
         && (<LabeledAction>element).label !== undefined
         && (<LabeledAction>element).actions !== undefined;

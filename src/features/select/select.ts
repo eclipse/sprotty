@@ -164,13 +164,11 @@ export class SelectAllCommand extends Command {
 
     undo(context: CommandExecutionContext): SModelRoot {
         const index = context.root.index;
-        for (const id in this.previousSelection) {
-            if (this.previousSelection.hasOwnProperty(id)) {
-                const element = index.getById(id);
-                if (element !== undefined && isSelectable(element))
-                    element.selected = this.previousSelection[id];
-            }
-        }
+        Object.keys(this.previousSelection).forEach(id => {
+            const element = index.getById(id);
+            if (element !== undefined && isSelectable(element))
+                element.selected = this.previousSelection[id];
+        });
         return context.root;
     }
 

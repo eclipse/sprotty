@@ -91,6 +91,7 @@ module.exports = {
                 "code": 180
             }
         ],
+        "no-prototype-builtins": "error",
         "no-caller": "error",
         "no-console": "off",
         "no-debugger": "warn",

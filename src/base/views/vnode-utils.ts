@@ -41,10 +41,7 @@ export function setNamespace(node: VNode, ns: string) {
 
 export function copyClassesFromVNode(source: VNode, target: VNode) {
     const classList = getClass(source);
-    for (const c in classList) {
-        if (classList.hasOwnProperty(c))
-            setClass(target, c, true);
-    }
+    Object.keys(classList).forEach(c => setClass(target, c, true));
 }
 
 export function copyClassesFromElement(element: HTMLElement, target: VNode) {

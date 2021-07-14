@@ -29,6 +29,7 @@ import { RequestPopupModelAction } from "../features/hover/hover";
 import { OpenAction } from '../features/open/open';
 import { UpdateModelAction, UpdateModelCommand } from "../features/update/update-model";
 import { ILogger } from "../utils/logging";
+import { hasOwnProperty } from '../utils/object';
 import { ComputedBoundsApplicator, ModelSource } from "./model-source";
 
 /**
@@ -39,8 +40,8 @@ export interface ActionMessage {
     action: Action
 }
 
-export function isActionMessage(object: any): object is ActionMessage {
-    return object !== undefined && object.hasOwnProperty('action');
+export function isActionMessage(object: unknown): object is ActionMessage {
+    return hasOwnProperty(object, 'action');
 }
 
 /**
